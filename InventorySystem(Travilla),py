@@ -1,0 +1,105 @@
+
+item_names = []      # List to store item names
+item_prices = {}     # Dictionary to store item name and price
+
+
+def show_menu():
+    print("\n===== INVENTORY MENU =====")
+    print("[1] Add Item")
+    print("[2] Update Price")
+    print("[3] Exit")
+
+def add_item():
+    print("\nEnter item name:", end=" ")
+    name = input()
+    
+    # Check if name is empty
+    if name == "":
+        print("Error: Item name cannot be empty!")
+        return
+    
+    # Check if item already exists
+    if name in item_names:
+        print("Item already exists in the inventory!")
+    else:
+        print("Enter price:", end=" ")
+        price = input()
+        
+        # Check if price is empty
+        if price == "":
+            print("Error: Price cannot be empty!")
+            return
+        
+        # Check if price is a valid number
+        try:
+            price_value = float(price)  # Try to convert to number
+            
+            # Check if price is negative
+            if price_value < 0:
+                print("Error: Price cannot be negative!")
+                return
+        except ValueError:
+            print("Error: Price must be a valid number!")
+            return
+        
+        # Add to list and dictionary
+        item_names.append(name)
+        item_prices[name] = price
+        
+        print("Item added successfully!")
+
+
+def update_price():
+    print("\nEnter item name to update:", end=" ")
+    name = input()
+    
+    # Check if name is empty
+    if name == "":
+        print("Error: Item name cannot be empty!")
+        return
+    
+    # Check if item exists
+    if name in item_names:
+        print("Enter new price:", end=" ")
+        new_price = input()
+        
+        # Check if price is empty
+        if new_price == "":
+            print("Error: Price cannot be empty!")
+            return
+        
+        # Check if price is a valid number
+        try:
+            price_value = float(new_price)  # Try to convert to number
+            
+            # Check if price is negative
+            if price_value < 0:
+                print("Error: Price cannot be negative!")
+                return
+        except ValueError:
+            print("Error: Price must be a valid number!")
+            return
+        
+        # Update the price in dictionary
+        item_prices[name] = new_price
+        
+        print("Price updated successfully!")
+    else:
+        print("Item not found in the inventory.")
+
+
+while True:
+    show_menu()
+    print("Choice:", end=" ")
+    choice = input()
+    
+    
+    if choice == "1":
+        add_item()
+    elif choice == "2":
+        update_price()
+    elif choice == "3":
+        print("Exiting system...")
+        break  
+    else:
+        print("Invalid choice! Please enter 1, 2, or 3.")
